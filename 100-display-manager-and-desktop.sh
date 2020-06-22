@@ -3,12 +3,8 @@
 ###############################################################################
 # Author	:	Erik Dubois
 # Website	:	https://www.erikdubois.be
-# Website	:	https://www.arcolinux.info
-# Website	:	https://www.arcolinux.com
-# Website	:	https://www.arcolinuxd.com
-# Website	:	https://www.arcolinuxb.com
-# Website	:	https://www.arcolinuxiso.com
-# Website	:	https://www.arcolinuxforum.com
+# Modified by : Chris Terrio
+# Email : cterrio@posteo.net
 ###############################################################################
 #
 #   DO NOT JUST RUN THIS. EXAMINE AND JUDGE. RUN AT YOUR OWN RISK.
@@ -48,11 +44,13 @@ echo "Installation of the core software"
 
 list=(
 lightdm
-arcolinux-lightdm-gtk-greeter
-arcolinux-lightdm-gtk-greeter-settings
+lightdm-gtk-greeter
+lightdm-gtk-greeter-settings
 arcolinux-wallpapers-git
 openbox
-arcolinux-logout-git
+oblogout
+yay
+yadm
 )
 
 count=0
@@ -66,16 +64,16 @@ done
 ###############################################################################
 
 tput setaf 6;echo "################################################################"
-echo "Copying all files and folders from /etc/skel to ~"
+echo "Copying all config files and making executable"
 echo "################################################################"
 echo;tput sgr0
-cp -Rf ~/.config ~/.config-backup-$(date +%Y.%m.%d-%H.%M.%S) && cp -rf /etc/skel/* ~
+yadm clone --bootstrap https://github.com/Tangeant/dotfiles
 
-tput setaf 5;echo "################################################################"
-echo "Enabling lightdm as display manager"
-echo "################################################################"
-echo;tput sgr0
-sudo systemctl enable lightdm.service -f
+#tput setaf 5;echo "################################################################"
+#echo "Enabling lightdm as display manager"
+#echo "################################################################"
+#echo;tput sgr0
+#sudo systemctl enable lightdm.service -f
 
 tput setaf 7;echo "################################################################"
 echo "You now have a very minimal functional desktop"
